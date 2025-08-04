@@ -14,7 +14,12 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
+    kernel = super.kernel.overrideAttrs (oldAttrs: {
+      src = pkgs.lib.cleanSource /home/enzuru/src/linux;
+    });
+  });
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -69,7 +74,6 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
     packages = with pkgs; [
-      aspell
       ccls
       clang
       emacs-pgtk
@@ -101,6 +105,7 @@
     git
     mg
     gnomeExtensions.paperwm
+    gnome-tweaks
   ];
 
   programs.firefox.enable = true;
