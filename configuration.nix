@@ -10,6 +10,8 @@
       /etc/nixos/hardware-configuration.nix
     ];
 
+  nixpkgs.config.allowUnfree = true;
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -52,11 +54,14 @@
     variant = "";
   };
 
-  fonts.packages = with pkgs; [
-    ipafont
-    hanazono
-    noto-fonts
-  ];
+  systemd = {
+    targets = {
+      sleep = { enable = false; unitConfig.DefaultDependencies = "no"; };
+      suspend = { enable = false; unitConfig.DefaultDependencies = "no"; };
+      hibernate = { enable = false; unitConfig.DefaultDependencies = "no"; };
+      "hybrid-sleep" = { enable = false; unitConfig.DefaultDependencies = "no"; };
+    };
+  };
 
   users.users.enzuru = {
     isNormalUser = true;
@@ -85,10 +90,11 @@
     ];
   };
 
-  programs.firefox.enable = true;
-  programs.fish.enable = true;
-
-  nixpkgs.config.allowUnfree = true;
+  fonts.packages = with pkgs; [
+    ipafont
+    hanazono
+    noto-fonts
+  ];
 
   environment.systemPackages = with pkgs; [
     curl
@@ -97,14 +103,8 @@
     gnomeExtensions.paperwm
   ];
 
-  systemd = {
-    targets = {
-      sleep = { enable = false; unitConfig.DefaultDependencies = "no"; };
-      suspend = { enable = false; unitConfig.DefaultDependencies = "no"; };
-      hibernate = { enable = false; unitConfig.DefaultDependencies = "no"; };
-      "hybrid-sleep" = { enable = false; unitConfig.DefaultDependencies = "no"; };
-    };
-  };
+  programs.firefox.enable = true;
+  programs.fish.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
