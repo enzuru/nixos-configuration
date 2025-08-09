@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -14,12 +14,15 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
+
   #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
     kernel = super.kernel.overrideAttrs (oldAttrs: {
       src = pkgs.lib.cleanSource /home/enzuru/src/linux;
     });
   });
+  system.nixos.tags = lib.mkAfter [ "magic-trackpad-fix" ];
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -68,14 +71,25 @@
     };
   };
 
+  documentation.dev.enable = true;
+
+  hardware.graphics.extraPackages = with pkgs; [
+    rocmPackages.clr.icd
+  ];
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
+
   users.users.enzuru = {
     isNormalUser = true;
     description = "Ahmed Khanzada";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
     packages = with pkgs; [
+      blender
       ccls
       clang
+      clinfo
       emacs-pgtk
       flatpak-builder
       fractal
@@ -88,6 +102,7 @@
       mc
       nodejs
       obsidian
+      radeontop
       sbcl
       thunderbird
       tree-sitter
