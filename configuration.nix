@@ -16,13 +16,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 10;
 
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
-    kernel = super.kernel.overrideAttrs (oldAttrs: {
-      src = pkgs.lib.cleanSource /home/enzuru/src/linux;
-    });
-  });
-  system.nixos.tags = lib.mkAfter [ "magic-trackpad-fix" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
+  #   kernel = super.kernel.overrideAttrs (oldAttrs: {
+  #     src = pkgs.lib.cleanSource /home/enzuru/src/linux;
+  #   });
+  # });
+  # system.nixos.tags = lib.mkAfter [ "magic-trackpad-fix" ];
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -44,6 +44,8 @@
 
   services.flatpak.enable = true;
   services.libinput.enable = true;
+  services.locate.enable = true;
+  services.locate.interval = "minutely";
   services.openssh.enable = true;
   services.pipewire = {
     enable = true;
@@ -75,7 +77,6 @@
 
   hardware.graphics.extraPackages = with pkgs; [
     rocmPackages.clr
-    rocmPackages.clr.icd
   ];
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
@@ -93,17 +94,29 @@
       clinfo
       emacs-pgtk
       fractal
+      elixir
+      elixir_ls
+      fish
+      fish-lsp
       gimp
       glances
       gnugo
       gnumake
       gnome-builder
+      go
+      gopls
+      ghc
+      haskell-language-server
       inkscape
       mc
-      mlocate
       nodejs
+      typescript-language-server
       obsidian
       radeontop
+      rustc
+      rust-analyzer
+      ruby
+      solargraph
       sbcl
       thunderbird
       tree-sitter
@@ -126,13 +139,6 @@
 
   programs.firefox.enable = true;
   programs.fish.enable = true;
-
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "*/1 * * * * enzuru . updatedb --localpaths=/home/enzuru --output=/home/enzuru/locatedb.n"
-    ];
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
