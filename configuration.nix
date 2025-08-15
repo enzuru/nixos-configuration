@@ -74,6 +74,7 @@
   documentation.dev.enable = true;
 
   hardware.graphics.extraPackages = with pkgs; [
+    rocmPackages.clr
     rocmPackages.clr.icd
   ];
   systemd.tmpfiles.rules = [
@@ -91,7 +92,6 @@
       clang
       clinfo
       emacs-pgtk
-      flatpak-builder
       fractal
       gimp
       glances
@@ -100,6 +100,7 @@
       gnome-builder
       inkscape
       mc
+      mlocate
       nodejs
       obsidian
       radeontop
@@ -125,6 +126,13 @@
 
   programs.firefox.enable = true;
   programs.fish.enable = true;
+
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "*/1 * * * * enzuru . updatedb --localpaths=/home/enzuru --output=/home/enzuru/locatedb.n"
+    ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
