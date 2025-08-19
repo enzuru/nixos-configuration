@@ -16,13 +16,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 10;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
-  #   kernel = super.kernel.overrideAttrs (oldAttrs: {
-  #     src = pkgs.lib.cleanSource /home/enzuru/src/linux;
-  #   });
-  # });
-  # system.nixos.tags = lib.mkAfter [ "magic-trackpad-fix" ];
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
+    kernel = super.kernel.overrideAttrs (oldAttrs: {
+      src = /home/enzuru/src/linux;
+    });
+  });
+  system.nixos.tags = lib.mkAfter [ "magic-trackpad-fix" ];
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -88,16 +88,24 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
     packages = with pkgs; [
+      awscli
+      biblioteca
       blender
+      bustle
       ccls
+      claude-code
       clang
       clinfo
+      dconf-editor
+      d-spy
       emacs-pgtk
+      eyedropper
       fractal
       elixir
       elixir_ls
       fish
       fish-lsp
+      flatpak-builder
       gimp
       glances
       gnugo
@@ -112,14 +120,19 @@
       nodejs
       typescript-language-server
       obsidian
+      python3
+      pyright
       radeontop
       rustc
       rust-analyzer
       ruby
       solargraph
+      shortwave
       sbcl
+      terraform
       thunderbird
       tree-sitter
+      wike
     ];
   };
 
