@@ -93,6 +93,7 @@
       blender
       bustle
       ccls
+      checkov
       claude-code
       clang
       clinfo
@@ -112,10 +113,12 @@
       gnumake
       gnome-builder
       go
+      godot
       gopls
       ghc
       haskell-language-server
       inkscape
+      jq
       mc
       nodejs
       typescript-language-server
