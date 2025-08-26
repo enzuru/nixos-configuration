@@ -16,13 +16,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 10;
 
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
-    kernel = super.kernel.overrideAttrs (oldAttrs: {
-      src = /home/enzuru/src/linux;
-    });
-  });
-  system.nixos.tags = lib.mkAfter [ "magic-trackpad-fix" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
+  #   kernel = super.kernel.overrideAttrs (oldAttrs: {
+  #     src = /home/enzuru/src/linux;
+  #   });
+  # });
+  # system.nixos.tags = lib.mkAfter [ "magic-trackpad-fix" ];
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -92,13 +92,14 @@
       biblioteca
       blender
       bustle
-      ccls
       checkov
       claude-code
       clang
+      clang-tools
       clinfo
-      dconf-editor
       d-spy
+      dconf-editor
+      discord
       emacs-pgtk
       eyedropper
       fractal
@@ -123,6 +124,7 @@
       nodejs
       typescript-language-server
       obsidian
+      polari
       python3
       pyright
       radeontop
