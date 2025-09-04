@@ -17,6 +17,9 @@
   boot.loader.systemd-boot.configurationLimit = 10;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    xpadneo
+  ];
   # boot.kernelPackages = pkgs.linuxPackages_latest.extend (self: super: {
   #   kernel = super.kernel.overrideAttrs (oldAttrs: {
   #     src = /home/enzuru/src/linux;
@@ -138,6 +141,7 @@
       thunderbird
       tree-sitter
       wike
+      wireshark
     ];
   };
 
@@ -154,6 +158,10 @@
     gnomeExtensions.paperwm
     gnome-tweaks
   ];
+
+  environment.sessionVariables = {
+    GTK_THEME = "Adwaita:dark";
+  };
 
   programs.firefox.enable = true;
   programs.fish.enable = true;
