@@ -49,6 +49,7 @@
   services.libinput.enable = true;
   services.locate.enable = true;
   services.locate.interval = "minutely";
+  services.mozillavpn.enable = true;
   services.openssh.enable = true;
   services.pipewire = {
     enable = true;
@@ -121,12 +122,14 @@
       gopls
       ghc
       haskell-language-server
+      htop
       inkscape
       jq
       mc
       nodejs
       typescript-language-server
       obsidian
+      openmw
       polari
       python3
       pyright
@@ -158,10 +161,6 @@
     gnomeExtensions.paperwm
     gnome-tweaks
   ];
-
-  environment.sessionVariables = {
-    GTK_THEME = "Adwaita:dark";
-  };
 
   programs.firefox.enable = true;
   programs.fish.enable = true;
