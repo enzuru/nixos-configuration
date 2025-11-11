@@ -27,6 +27,21 @@
   # });
   # system.nixos.tags = lib.mkAfter [ "magic-trackpad-fix" ];
 
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "65536";
+    }
+    {
+      domain = "*";
+      type = "hard";
+      item = "nofile";
+      value = "524288";
+    }
+  ];
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
@@ -92,17 +107,17 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
     packages = with pkgs; [
+      autoconf
       awscli
       biblioteca
       blender
-      bustle
+      blueprint-compiler
+      btop
       checkov
       claude-code
       clang
       clang-tools
       clinfo
-      d-spy
-      dconf-editor
       discord
       emacs-pgtk
       eyedropper
@@ -112,37 +127,45 @@
       fish
       fish-lsp
       flatpak-builder
+      gdb
       gimp
       glances
       gnugo
       gnumake
       gnome-builder
+      gnome-sound-recorder
       go
       godot
       gopls
+      guile
       ghc
       haskell-language-server
       htop
+      hugo
       inkscape
       jq
+      lsof
       mc
       nodejs
       typescript-language-server
       obsidian
       openmw
+      openssl
       polari
       python3
       pyright
       radeontop
+      resources
       rustc
       rust-analyzer
       ruby
       solargraph
-      shortwave
       sbcl
+      shortwave
       terraform
       thunderbird
       tree-sitter
+      vulkan-tools
       wike
       wireshark
     ];
@@ -157,13 +180,35 @@
   environment.systemPackages = with pkgs; [
     curl
     git
-    mg
     gnomeExtensions.paperwm
-    gnome-tweaks
+    mg
+    wget
   ];
 
   programs.firefox.enable = true;
   programs.fish.enable = true;
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-vaapi
+      obs-gstreamer
+      obs-vkcapture
+    ];
+  };
+
+  # systemd.user.services.mozillavpn-ui = {
+  #   enable = true;
+  #   description = "Mozilla VPN UI";
+  #   wantedBy = [ "graphical-session.target" ];
+  #   after = [ "graphical-session.target" ];
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.mozillavpn}/bin/mozillavpn";
+  #     Restart = "on-failure";
+  #   };
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
