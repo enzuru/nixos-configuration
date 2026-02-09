@@ -94,8 +94,13 @@
 
   documentation.dev.enable = true;
 
+  hardware.amdgpu.opencl.enable = true;
+  hardware.cpu.amd.updateMicrocode = true;
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
   hardware.graphics.extraPackages = with pkgs; [
     rocmPackages.clr
+    libva
   ];
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
@@ -108,9 +113,10 @@
     shell = pkgs.fish;
     packages = with pkgs; [
       autoconf
+      appstream
       awscli
       biblioteca
-      blender
+      blender-hip
       blueprint-compiler
       btop
       checkov
@@ -121,9 +127,10 @@
       discord
       emacs-pgtk
       eyedropper
+      exercism
       fractal
       elixir
-      elixir_ls
+      elixir-ls
       fish
       fish-lsp
       flatpak-builder
@@ -139,6 +146,7 @@
       gopls
       guile
       ghc
+      git-lfs
       haskell-language-server
       htop
       hugo
@@ -165,6 +173,7 @@
       terraform
       thunderbird
       tree-sitter
+      tmux
       vulkan-tools
       wike
       wireshark
