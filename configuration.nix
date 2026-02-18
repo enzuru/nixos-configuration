@@ -4,13 +4,41 @@
 
 { config, pkgs, lib, ... }:
 
+let
+  myEmacs = (pkgs.emacsPackagesFor pkgs.emacs-git-pgtk).emacsWithPackages (epkgs: with pkgs; [
+    clang-tools
+    elixir-ls
+    fish-lsp
+    gopls
+    haskell-language-server
+    pyright
+    rust-analyzer
+    solargraph
+    typescript-language-server
+  ]);
+  blenderRocm = pkgs.pkgsRocm.blender;
+in
+
 {
   imports =
     [
-      /etc/nixos/hardware-configuration.nix
+      ./hardware-configuration.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
+
+  nix.settings = {
+    substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+    max-jobs = 4;
+    cores = 4;
+  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -76,8 +104,8 @@
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -116,23 +144,20 @@
       appstream
       awscli
       biblioteca
-      blender-hip
+      blenderRocm
       blueprint-compiler
       btop
       checkov
       claude-code
       clang
-      clang-tools
       clinfo
       discord
-      emacs-pgtk
+      myEmacs
       eyedropper
       exercism
       fractal
       elixir
-      elixir-ls
       fish
-      fish-lsp
       flatpak-builder
       gdb
       gimp
@@ -143,11 +168,9 @@
       gnome-sound-recorder
       go
       godot
-      gopls
       guile
       ghc
       git-lfs
-      haskell-language-server
       htop
       hugo
       inkscape
@@ -155,19 +178,15 @@
       lsof
       mc
       nodejs
-      typescript-language-server
       obsidian
       openmw
       openssl
       polari
       python3
-      pyright
       radeontop
       resources
       rustc
-      rust-analyzer
       ruby
-      solargraph
       sbcl
       shortwave
       terraform
