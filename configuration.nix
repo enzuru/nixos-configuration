@@ -17,6 +17,9 @@ let
     typescript-language-server
   ]);
   blenderRocm = pkgs.pkgsRocm.blender;
+  myPython = pkgs.python3.withPackages (ps: [
+    (ps.torch.override { rocmSupport = true; })
+  ]);
 in
 
 {
@@ -36,8 +39,8 @@ in
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
-    max-jobs = 4;
-    cores = 4;
+    max-jobs = 12;
+    cores = 12;
   };
 
   boot.loader.systemd-boot.enable = true;
@@ -143,12 +146,14 @@ in
       autoconf
       appstream
       awscli
+      b4
       biblioteca
       blenderRocm
       blueprint-compiler
       btop
       checkov
       claude-code
+      claude-code-acp
       clang
       clinfo
       discord
@@ -168,6 +173,7 @@ in
       gnome-sound-recorder
       go
       godot
+      google-chrome
       guile
       ghc
       git-lfs
@@ -182,13 +188,16 @@ in
       openmw
       openssl
       polari
-      python3
+      public-inbox
+      myPython
+      rocmPackages.rocminfo
       radeontop
       resources
       rustc
       ruby
       sbcl
       shortwave
+      stack
       terraform
       thunderbird
       tree-sitter
