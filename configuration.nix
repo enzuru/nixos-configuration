@@ -58,6 +58,11 @@ in
   # });
   # system.nixos.tags = lib.mkAfter [ "magic-trackpad-fix" ];
 
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 32*1024; # 32 GiB
+  }];
+
   security.pam.loginLimits = [
     {
       domain = "*";
@@ -183,6 +188,8 @@ in
       jq
       lsof
       mc
+      nix-prefetch-github
+      nixpkgs-review
       nodejs
       obsidian
       openmw
@@ -217,7 +224,7 @@ in
   environment.systemPackages = with pkgs; [
     curl
     git
-    gnomeExtensions.paperwm
+    #gnomeExtensions.paperwm
     mg
     wget
   ];
