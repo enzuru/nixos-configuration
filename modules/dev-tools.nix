@@ -17,6 +17,9 @@ in
 {
   documentation.dev.enable = true;
 
+  services.locate.enable = true;
+  services.locate.interval = "minutely";
+
   users.users.enzuru.packages = with pkgs; [
     # Editor
     enzuru-emacs
