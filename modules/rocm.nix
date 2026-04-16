@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 let
-  blenderRocm = pkgs.pkgsRocm.blender;
-  myPython = pkgs.python3.withPackages (ps: [
+  blender-rocm = pkgs.pkgsRocm.blender;
+  python-rocm = pkgs.python3.withPackages (ps: [
     (ps.torch.override { rocmSupport = true; })
   ]);
 in
@@ -22,8 +22,8 @@ in
   ];
 
   users.users.enzuru.packages = [
-    blenderRocm
-    myPython
+    blender-rocm
+    python-rocm
     pkgs.rocmPackages.rocminfo
     pkgs.radeontop
     pkgs.clinfo
