@@ -7,7 +7,7 @@
       ./modules/boot.nix
       ./modules/desktop.nix
       ./modules/dev-tools.nix
-      ./modules/internationalization.nix
+      ./modules/locale.nix
       ./modules/nix.nix
       ./modules/obs.nix
       ./modules/rocm.nix
@@ -32,7 +32,7 @@
     size = 32*1024;
   }];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.05"; # Don't change this
 
   systemd = {
     targets = {
