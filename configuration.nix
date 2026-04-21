@@ -16,8 +16,8 @@
     ];
 
   nix.settings = {
-    max-jobs = 12;
-    cores = 12;
+    max-jobs = 4;
+    cores = 4;
   };
 
   networking.hostName = "nixos";
