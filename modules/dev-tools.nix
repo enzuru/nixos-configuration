@@ -6,7 +6,6 @@ let
     elixir-ls
     fish-lsp
     gopls
-    haskell-language-server
     pyright
     rust-analyzer
     solargraph
@@ -33,6 +32,7 @@ in
     ghc
     go
     guile
+    haskell-language-server
     nodejs
     ruby
     rustc
