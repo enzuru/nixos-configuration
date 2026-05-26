@@ -25,7 +25,14 @@
 
   programs.fish.enable = true;
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = "no";
+    };
+  };
 
   swapDevices = [{
     device = "/var/lib/swapfile";

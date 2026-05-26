@@ -1,9 +1,20 @@
 { config, pkgs, ... }:
 
 {
+  fonts.packages = with pkgs; [
+    ipafont
+    hanazono
+    noto-fonts
+  ];
+
   hardware.bluetooth.enable = true;
 
   programs.firefox.enable = true;
+  programs.wireshark = {
+    enable = true;
+    dumpcap.enable = true;
+    usbmon.enable = true;
+  };
 
   services.libinput.enable = true;
   services.flatpak.enable = true;
@@ -23,11 +34,10 @@
     variant = "";
   };
 
-  fonts.packages = with pkgs; [
-    ipafont
-    hanazono
-    noto-fonts
-  ];
+  users.users.enzuru = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "wireshark" ];
+  };
 
   users.users.enzuru.packages = with pkgs; [
     # Adwaita
@@ -48,7 +58,6 @@
 
     # QT
     inkscape
-    wireshark
 
     # Unfree
     discord
@@ -58,4 +67,14 @@
     # Other
     godot
   ];
+
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+    };
+  };
 }
