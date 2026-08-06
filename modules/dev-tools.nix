@@ -25,7 +25,7 @@ in
 
     # AI
     claude-code
-    claude-code-acp
+    claude-agent-acp
 
     # Languages
     elixir
@@ -50,7 +50,9 @@ in
     # Dev utilities
     appstream
     b4
+    cachix
     curl
+    darcs
     gdb
     git
     git-lfs
@@ -66,7 +68,7 @@ in
 
     # Infrastructure
     awscli
-    checkov
+    # checkov
     terraform
 
     # Monitoring

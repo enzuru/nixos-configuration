@@ -9,6 +9,16 @@
 
   hardware.bluetooth.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    gnomeExtensions.paperwm
+  ];
+
+  programs.dconf.profiles.user.databases = [{
+    settings."org/gnome/shell" = {
+      enabled-extensions = [ pkgs.gnomeExtensions.paperwm.extensionUuid ];
+    };
+  }];
+
   programs.firefox.enable = true;
   programs.wireshark = {
     enable = true;
