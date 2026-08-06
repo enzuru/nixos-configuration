@@ -54,7 +54,7 @@
 
   users.users.enzuru = {
     isNormalUser = true;
-    description = "Ahmed Khanzada";
+    description = "إلياس خانزاده";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
     packages = with pkgs; [
