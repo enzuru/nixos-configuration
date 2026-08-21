@@ -9,7 +9,8 @@
       "ar_LB.UTF-8/UTF-8"
     ];
     extraLocaleSettings = {
-      LANGUAGE = "ar_LB:ar";
+      #LANGUAGE = "ar_LB:ar";
+      LANGUAGE = "en_US.UTF-8";
       LC_ADDRESS = "en_US.UTF-8";
       LC_IDENTIFICATION = "en_US.UTF-8";
       LC_MEASUREMENT = "en_US.UTF-8";

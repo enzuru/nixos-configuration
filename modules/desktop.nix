@@ -10,12 +10,17 @@
   hardware.bluetooth.enable = true;
 
   environment.systemPackages = with pkgs; [
+    gnomeExtensions.appindicator
     gnomeExtensions.paperwm
   ];
 
   programs.dconf.profiles.user.databases = [{
     settings."org/gnome/shell" = {
-      enabled-extensions = [ pkgs.gnomeExtensions.paperwm.extensionUuid ];
+      enabled-extensions = [
+        # GNOME has no legacy tray; tray-only apps need this to be reachable.
+        pkgs.gnomeExtensions.appindicator.extensionUuid
+        pkgs.gnomeExtensions.paperwm.extensionUuid
+      ];
     };
   }];
 
