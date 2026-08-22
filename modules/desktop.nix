@@ -10,10 +10,7 @@
   hardware.bluetooth.enable = true;
 
   # GNOME Shell extensions live in modules/gnome-extensions.nix.
-
-  programs.dconf.profiles.user.databases = [{
-    settings."org/gnome/desktop/input-sources".xkb-options = [ "ctrl:nocaps" ];
-  }];
+  # Caps-Lock-as-Ctrl is laptop-only; see hosts/laptop/default.nix.
 
   programs.firefox.enable = true;
   programs.wireshark = {
