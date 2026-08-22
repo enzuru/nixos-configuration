@@ -10,6 +10,8 @@
   nix.optimise.automatic = true;
 
   nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+
     substituters = [
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"

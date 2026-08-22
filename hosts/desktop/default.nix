@@ -6,6 +6,9 @@
     ../../modules/obs.nix
   ];
 
+  # Tiling only on the big screen; the laptop stays on stock GNOME.
+  local.gnomeExtensions = [ pkgs.gnomeExtensions.paperwm ];
+
   # Tuned to this box's core count; the laptop leaves these at "auto".
   nix.settings = {
     max-jobs = 4;

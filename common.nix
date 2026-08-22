@@ -8,6 +8,7 @@
       ./modules/boot.nix
       ./modules/desktop.nix
       ./modules/dev-tools.nix
+      ./modules/gnome-extensions.nix
       ./modules/locale.nix
       ./modules/mozilla-vpn.nix
       ./modules/nextcloud.nix

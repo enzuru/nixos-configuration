@@ -9,19 +9,10 @@
 
   hardware.bluetooth.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    gnomeExtensions.appindicator
-    gnomeExtensions.paperwm
-  ];
+  # GNOME Shell extensions live in modules/gnome-extensions.nix.
 
   programs.dconf.profiles.user.databases = [{
-    settings."org/gnome/shell" = {
-      enabled-extensions = [
-        # GNOME has no legacy tray; tray-only apps need this to be reachable.
-        pkgs.gnomeExtensions.appindicator.extensionUuid
-        pkgs.gnomeExtensions.paperwm.extensionUuid
-      ];
-    };
+    settings."org/gnome/desktop/input-sources".xkb-options = [ "ctrl:nocaps" ];
   }];
 
   programs.firefox.enable = true;
