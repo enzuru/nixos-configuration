@@ -7,18 +7,10 @@
     nextcloud-client
   ];
 
-  # The client is tray-only once configured, so start it hidden per-session
-  # rather than dropping a .desktop into ~/.config/autostart.
-  systemd.user.services.nextcloud-client = {
-    description = "Nextcloud sync client";
-    after = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    wantedBy = [ "graphical-session.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloud --background";
-      ExecStop = "${pkgs.nextcloud-client}/bin/nextcloud --quit";
-      Restart = "on-failure";
-      RestartSec = 5;
-    };
-  };
+  # Autostart is deliberately left to the client's own "Launch on system
+  # startup" setting, which writes ~/.config/autostart/Nextcloud.desktop with a
+  # profile-relative Exec, so it survives rebuilds and GC. A systemd user
+  # service was tried and reverted: the client exits 255 when another instance
+  # already holds its lock, which Restart=on-failure turned into a permanent
+  # restart loop.
 }

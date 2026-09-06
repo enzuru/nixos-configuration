@@ -21,6 +21,9 @@
     local.gnomeExtensions = [
       # GNOME has no legacy tray; tray-only apps need this to be reachable.
       pkgs.gnomeExtensions.appindicator
+
+      # Cosmetic: blurs the overview, panel, and dash.
+      pkgs.gnomeExtensions.blur-my-shell
     ];
 
     environment.systemPackages = config.local.gnomeExtensions;
