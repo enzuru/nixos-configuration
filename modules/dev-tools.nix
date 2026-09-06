@@ -3,6 +3,7 @@
 let
   enzuru-emacs = (pkgs.emacsPackagesFor pkgs.emacs-git-pgtk).emacsWithPackages (epkgs: with pkgs; [
     clang-tools
+    clojure-lsp
     elixir-ls
     fish-lsp
     gopls
@@ -28,6 +29,7 @@ in
     claude-agent-acp
 
     # Languages
+    clojure
     elixir
     ghc
     go
@@ -45,6 +47,7 @@ in
     flatpak-builder
     gnumake
     hugo
+    leiningen
     stack
 
     # Dev utilities

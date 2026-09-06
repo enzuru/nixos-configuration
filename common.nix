@@ -10,7 +10,7 @@
       ./modules/dev-tools.nix
       ./modules/gnome-extensions.nix
       ./modules/locale.nix
-      ./modules/mozilla-vpn.nix
+      #./modules/mozilla-vpn.nix
       ./modules/nextcloud.nix
       ./modules/nix.nix
       ./modules/rocm.nix
