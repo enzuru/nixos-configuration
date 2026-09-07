@@ -60,6 +60,7 @@ in
     git
     git-lfs
     jq
+    libghostty-vt
     mc
     mg
     nix-prefetch-github
