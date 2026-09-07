@@ -1,19 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  enzuru-emacs = (pkgs.emacsPackagesFor pkgs.emacs-git-pgtk).emacsWithPackages (epkgs: with pkgs; [
-    clang-tools
-    clojure-lsp
-    elixir-ls
-    fish-lsp
-    gopls
-    pyright
-    rust-analyzer
-    solargraph
-    typescript-language-server
-  ]);
-in
-
 {
   documentation.dev.enable = true;
 
@@ -22,7 +8,7 @@ in
 
   users.users.enzuru.packages = with pkgs; [
     # Editor
-    enzuru-emacs
+    emacs-git-pgtk
 
     # AI
     claude-code
@@ -34,11 +20,22 @@ in
     ghc
     go
     guile
-    haskell-language-server
     nodejs
     ruby
     rustc
     sbcl
+
+    # Language servers
+    clang-tools
+    clojure-lsp
+    elixir-ls
+    fish-lsp
+    gopls
+    haskell-language-server
+    pyright
+    rust-analyzer
+    solargraph
+    typescript-language-server
 
     # Build tools
     autoconf
