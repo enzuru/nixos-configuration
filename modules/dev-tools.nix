@@ -94,6 +94,7 @@ in
     go
     guile
     nodejs
+    python3
     ruby
     rustc
     sbcl

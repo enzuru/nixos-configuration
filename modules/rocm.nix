@@ -23,7 +23,7 @@ in
 
   users.users.enzuru.packages = [
     blender-rocm
-    python-rocm
+    #python-rocm
     pkgs.rocmPackages.rocminfo
     pkgs.radeontop
     pkgs.clinfo
