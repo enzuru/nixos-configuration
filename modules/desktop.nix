@@ -48,6 +48,7 @@
     eyedropper
     fractal
     gnome-builder
+    gnome-mahjongg
     gnome-sound-recorder
     polari
     resources
