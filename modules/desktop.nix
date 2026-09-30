@@ -18,6 +18,7 @@
     dumpcap.enable = true;
     usbmon.enable = true;
   };
+  programs.steam.enable = true;
 
   services.libinput.enable = true;
   services.flatpak.enable = true;
