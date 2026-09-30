@@ -50,6 +50,8 @@
     gnome-builder
     gnome-mahjongg
     gnome-sound-recorder
+    high-tide
+    newsflash
     polari
     resources
     shortwave
@@ -70,6 +72,7 @@
 
     # Other
     godot
+    heroic
   ];
 
   xdg = {
