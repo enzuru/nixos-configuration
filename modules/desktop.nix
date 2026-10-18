@@ -57,6 +57,7 @@
     resources
     shortwave
     wike
+    wordbook
 
     # GTK
     deluge
