@@ -142,7 +142,7 @@ in
     wget
 
     # Infrastructure
-    awscli
+    # awscli
     # checkov
     terraform
 

@@ -62,6 +62,7 @@
     # GTK
     deluge
     gimp
+    libreoffice
     thunderbird
 
     # QT
